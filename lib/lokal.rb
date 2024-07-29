@@ -203,10 +203,9 @@ module Lokal
       BANNER
 
       colors = [:magenta, :blue, :cyan, :green, :red]
-      banner_lines = banner.split("\n")
-      banner_lines.each_with_index do |line, index|
-        puts line.colorize(colors[index % colors.length])
-      end
+      random_color = colors.sample
+      
+      puts banner.colorize(random_color)
 
       puts
       puts "Minimum Lokal Client".colorize(:red) + "\t" + Lokal::Client::SERVER_MIN_VERSION
