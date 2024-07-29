@@ -21,16 +21,25 @@ gem install lokal
 
 ```ruby
 require 'lokal'
+require 'sinatra'
 
 client = Lokal::Client.new
 tunnel = client.new_tunnel
-           .set_name("my-tunnel")
+           .set_name("Sinatra Backend")
            .set_tunnel_type("HTTP")
-           .set_local_address("localhost:3000")
+           .set_local_address("4567")
            # self-hosted tunnel server with domain k.lokal-so.site must be exist or using Lokal Cloud
            .set_public_address("mybackend551.k.lokal-so.site")
-           .set_lan_address("my-app2.local")
+           .set_lan_address("sinatra1.local")
            .show_startup_banner
 
 tunnel.create
+
+configure do
+  set :port, 4567
+end
+
+get '/' do
+  'Hello world!'
+end
 ```
