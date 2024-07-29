@@ -31,6 +31,7 @@ tunnel = client.new_tunnel
            # self-hosted tunnel server with domain k.lokal-so.site must be exist or using Lokal Cloud
            .set_public_address("mybackend551.k.lokal-so.site")
            .set_lan_address("sinatra1.local")
+           .ignore_duplicate()
            .show_startup_banner
 
 tunnel.create
