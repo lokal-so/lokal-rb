@@ -2,6 +2,8 @@
 
 Ruby Gem for interacting with Lokal Client REST API.
 
+[![Gem Version](https://badge.fury.io/rb/lokal.svg)](https://badge.fury.io/rb/lokal)
+
 ![screenshot cli](screenshot1.png)
 ![screenshot address bar](screenshot2.png)
 
