@@ -3,10 +3,11 @@
 require 'json'
 require 'faraday'
 require 'semantic'
+require 'colorize'
 
 module Lokal
   class Client
-    SERVER_MIN_VERSION = '0.1.0' # Replace with the actual minimum version
+    SERVER_MIN_VERSION = '0.6.0'
 
     attr_reader :base_url, :rest
 
@@ -124,7 +125,7 @@ module Lokal
       tunnel_data = data['data'].first
       update_attributes(tunnel_data)
 
-      show_startup_banner if @startup_banner
+      print_startup_banner if @startup_banner
 
       self
     rescue Faraday::ClientError => e
@@ -192,12 +193,26 @@ module Lokal
       show_startup_banner if @startup_banner
     end
 
-    def show_startup_banner
-      # Implement the banner display logic here
-      # You might want to use a gem like 'colorize' for colored output
-      puts "Lokal Tunnel Created:"
-      puts "Public Address: https://#{@address_public}" if @address_public
-      puts "LAN Address: https://#{get_lan_address}" if @address_mdns
+    def print_startup_banner
+      banner = <<-BANNER
+    __       _         _             
+   / /  ___ | | ____ _| |  ___  ___  
+  / /  / _ \\| |/ / _  | | / __|/ _ \\ 
+ / /__| (_) |   < (_| | |_\\__ \\ (_) |
+ \\____/\\___/|_|\\_\\__,_|_(_)___/\\___/
+      BANNER
+
+      colors = [:magenta, :blue, :cyan, :green, :red]
+      banner_lines = banner.split("\n")
+      banner_lines.each_with_index do |line, index|
+        puts line.colorize(colors[index % colors.length])
+      end
+
+      puts
+      puts "Minimum Lokal Client".colorize(:red) + "\t" + Lokal::Client::SERVER_MIN_VERSION
+      puts "Public Address".colorize(:cyan) + "\t\thttps://#{@address_public}" if @address_public.length > 0
+      puts "LAN Address".colorize(:green) + "\t\thttps://#{get_lan_address}" if @address_mdns.length > 0
+      puts
     end
   end
 

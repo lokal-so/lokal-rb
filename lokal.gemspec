@@ -19,8 +19,9 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "faraday", "~> 1.0"
-  spec.add_dependency "semantic", "~> 1.6"
+  spec.add_dependency "faraday", "~> 2.7.11"
+  spec.add_dependency "semantic", "~> 1.6.1"
+	spec.add_dependency "colorize", "~> 0.8.1"
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 13.0"
